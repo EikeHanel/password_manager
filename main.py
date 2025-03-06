@@ -1,9 +1,7 @@
 import random
 
-ABC_LOWER = list("abcdefghijklmnopqrstuvwxyz")
-ABC_UPPER = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-NUMBERS = list("0123456789")
-SYMBOLS = list("!@#$%^&*()-_=+[]{}|;:'\",.<>?/`~")
+def main():
+    print(generate_password())
 
 
 ## add database
@@ -21,4 +19,15 @@ def generate_password(n_lower=6, n_upper=4, n_num=3, n_sym=3):
     random.shuffle(password)
     return "".join(password)
 
-print(generate_password())
+
+def hash_password(password):
+    pass
+
+
+if __name__ == "__main__":
+    ABC_LOWER = list("abcdefghijklmnopqrstuvwxyz")
+    ABC_UPPER = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    NUMBERS = list("0123456789")
+    SYMBOLS = list("!@#$%^&*()-_=+[]{}|;:'\",.<>?/`~")
+    main()
+    
