@@ -1,7 +1,8 @@
 # $pip install bcrypt
 import random
 import sqlite3
-#import bcrypt
+import bcrypt
+
 
 def main():
     db = sqlite3.connect('passwords.db')
@@ -12,12 +13,12 @@ def main():
                    (user_id, password)''')
     db.commit()
     db.close()
-    
-
-
-## add database
-## add hashing + salting
-## GUI
+    test = generate_password()
+    print(test)
+    print(hash_password(test))
+# # add database
+# # add hashing + salting
+# # GUI
 
 
 def generate_password(n_lower=6, n_upper=4, n_num=3, n_sym=3):
@@ -32,11 +33,12 @@ def generate_password(n_lower=6, n_upper=4, n_num=3, n_sym=3):
 
 
 def hash_password(password):
-    return bcrypt.hashpw(password, bcrypt.gensalt())
+    pw_bytes = password.encode('utf-8')
+    return bcrypt.hashpw(pw_bytes, bcrypt.gensalt())
      
 
-def check_password(password, hash):
-    return bcrypt.checkpw(password, hash)
+def check_password(password, hash_pw):
+    return bcrypt.checkpw(password, hash_pw)
 
 
 if __name__ == "__main__":
