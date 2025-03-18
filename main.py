@@ -1,7 +1,18 @@
+# $pip install bcrypt
 import random
+import sqlite3
+#import bcrypt
 
 def main():
-    print(generate_password())
+    db = sqlite3.connect('passwords.db')
+    cursor = db.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS user
+                   (user_id, user_name, user_password)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS password
+                   (user_id, password)''')
+    db.commit()
+    db.close()
+    
 
 
 ## add database
@@ -21,7 +32,11 @@ def generate_password(n_lower=6, n_upper=4, n_num=3, n_sym=3):
 
 
 def hash_password(password):
-    pass
+    return bcrypt.hashpw(password, bcrypt.gensalt())
+     
+
+def check_password(password, hash):
+    return bcrypt.checkpw(password, hash)
 
 
 if __name__ == "__main__":
